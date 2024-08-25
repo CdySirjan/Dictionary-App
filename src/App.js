@@ -6,10 +6,6 @@ function App() {
     const [result, setResult] = useState('');
 
     const handleSearch = () => {
-      //fetching the dictionary api here
-
-
-      
         setResult(`Definition of ${word}`);
     };
 
