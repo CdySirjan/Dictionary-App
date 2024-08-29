@@ -5,8 +5,14 @@ function App() {
     const [word, setWord] = useState('');
     const [result, setResult] = useState('');
 
-    const handleSearch = () => {
-        setResult(`Definition of ${word}`);
+    const handleSearch = async () => {
+        setResult('');  // set 0 value for next value
+        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            setResult(data[0].meanings[0].definitions[0].definition);
+        }
     };
 
     return (
@@ -27,7 +33,7 @@ function App() {
             <div id="result">
                 {result && (
                     <div className="definition">
-                        <p>{result}</p>
+                        <p>Definition: {result}</p>
                     </div>
                 )}
             </div>
